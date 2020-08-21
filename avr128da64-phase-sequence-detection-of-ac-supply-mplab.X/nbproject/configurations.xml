@@ -105,7 +105,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="AVR-Dx_DFP" vendor="Microchip" version="1.3.65"/>
+        <pack name="AVR-Dx_DFP" vendor="Microchip" version="1.4.75"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -166,6 +166,7 @@
         <property key="verbose" value="false"/>
         <property key="warning-level" value="-3"/>
         <property key="what-to-do" value="ignore"/>
+        <appendMe value="-mpa -flto"/>
       </HI-TECH-COMP>
       <HI-TECH-LINK>
         <property key="additional-options-checksum" value=""/>
@@ -212,6 +213,7 @@
         <property key="opt-xc8-linker-serial" value=""/>
         <property key="program-the-device-with-default-config-words" value="true"/>
         <property key="remove-unused-sections" value="true"/>
+        <appendMe value="-mpa -flto"/>
       </HI-TECH-LINK>
       <XC8-CO>
         <property key="coverage-enable" value=""/>
@@ -237,13 +239,13 @@
         <targetDevice>AVR128DA64</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool></platformTool>
+        <platformTool>noID</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.20</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="AVR-Dx_DFP" vendor="Microchip" version="1.3.65"/>
+        <pack name="AVR-Dx_DFP" vendor="Microchip" version="1.4.75"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -319,7 +321,7 @@
         <property key="default-bitfield-type" value="true"/>
         <property key="default-char-type" value="true"/>
         <property key="define-macros" value=""/>
-        <property key="disable-optimizations" value="false"/>
+        <property key="disable-optimizations" value="true"/>
         <property key="extra-include-directories" value=""/>
         <property key="favor-optimization-for" value="-speed,+space"/>
         <property key="garbage-collect-data" value="true"/>
@@ -333,7 +335,7 @@
         <property key="optimization-debug" value="false"/>
         <property key="optimization-invariant-enable" value="false"/>
         <property key="optimization-invariant-value" value="16"/>
-        <property key="optimization-level" value="-O1"/>
+        <property key="optimization-level" value="-O0"/>
         <property key="optimization-speed" value="false"/>
         <property key="optimization-stable-enable" value="false"/>
         <property key="pack-struct" value="true"/>
@@ -345,6 +347,7 @@
         <property key="verbose" value="false"/>
         <property key="warning-level" value="-3"/>
         <property key="what-to-do" value="ignore"/>
+        <appendMe value="-mpa -flto"/>
       </HI-TECH-COMP>
       <HI-TECH-LINK>
         <property key="additional-options-checksum" value=""/>
@@ -391,6 +394,7 @@
         <property key="opt-xc8-linker-serial" value=""/>
         <property key="program-the-device-with-default-config-words" value="true"/>
         <property key="remove-unused-sections" value="true"/>
+        <appendMe value="-mpa -flto"/>
       </HI-TECH-LINK>
       <XC8-CO>
         <property key="coverage-enable" value=""/>
@@ -416,13 +420,13 @@
         <targetDevice>AVR128DA64</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool></platformTool>
+        <platformTool>noID</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.20</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="AVR-Dx_DFP" vendor="Microchip" version="1.3.65"/>
+        <pack name="AVR-Dx_DFP" vendor="Microchip" version="1.4.75"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -483,6 +487,7 @@
         <property key="verbose" value="false"/>
         <property key="warning-level" value="-3"/>
         <property key="what-to-do" value="ignore"/>
+        <appendMe value="-mpa -flto"/>
       </HI-TECH-COMP>
       <HI-TECH-LINK>
         <property key="additional-options-checksum" value=""/>
@@ -529,6 +534,7 @@
         <property key="opt-xc8-linker-serial" value=""/>
         <property key="program-the-device-with-default-config-words" value="true"/>
         <property key="remove-unused-sections" value="true"/>
+        <appendMe value="-mpa -flto"/>
       </HI-TECH-LINK>
       <XC8-CO>
         <property key="coverage-enable" value=""/>

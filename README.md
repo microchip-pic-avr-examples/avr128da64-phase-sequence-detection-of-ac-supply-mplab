@@ -15,8 +15,9 @@ Phase Sequence Detection of Three-Phase AC Supply demonstration and implementati
 
 The demonstration is implemented with both AVR128DA64 and AVR128DA48 microcontrollers and it is available on microchip GitHub page-
 
-* Using <a href="https://github.com/microchip-pic-avr-examples/avr128da64-phase-sequence-detection-of-ac-supply-studio" rel="nofollow">AVR128DA64
-* Using <a href="https://github.com/microchip-pic-avr-examples/avr128da48-phase-sequence-detection-of-ac-supply-studio" rel="nofollow">AVR128DA48 
+* <a href="https://github.com/microchip-pic-avr-examples/avr128da48-phase-sequence-detection-of-ac-supply-mplab" rel="nofollow">AVR128DA48 Phase Sequence Detection application code example using MPLAB
+* <a href="https://github.com/microchip-pic-avr-examples/avr128da48-phase-sequence-detection-of-ac-supply-studio" rel="nofollow">AVR128DA48 Phase Sequence Detection application code example using Atmel Studio
+* <a href="https://github.com/microchip-pic-avr-examples/avr128da64-phase-sequence-detection-of-ac-supply-studio" rel="nofollow">AVR128DA64 Phase Sequence Detection application code example using Atmel studio
 
 ## Software Tools Used 
 
@@ -25,6 +26,7 @@ Following are the tools which are used for this demo application:
 * <a href="https://www.microchip.com/mplab/mplab-x-ide" rel="nofollow">MPLAB X (v5.40)
 * <a href="https://www.microchip.com/mplab/compilers" rel="nofollow">XC8 compiler (v2.20)
 * <a href="https://www.microchip.com/mplab/mplab-code-configurator" rel="nofollow">MPLAB® Code Configurator (v3.95.0)
+* <a href="https://packs.download.microchip.com" rel="nofollow">DFP Pack (v1.4.75)
 * <a href="https://www.microchip.com/mplab/avr-support/data-visualizer" rel="nofollow">Standalone Data Visualizer (v2.20.674)
 
 ## Hardware Used
@@ -85,7 +87,7 @@ Refer Data Visualizer User Guide for more information about <a href="http://ww1.
 The demo uses an emulated three-phase AC supply to showcase the essential features of the application. To emulate the AC power supply three waveform clicks are used in the application.
 
 
-## Dashboard User Inputs and Output Indicators  
+## Custom Dashboard: User Inputs and Output Indicators  
 
 The Data Visualizer custom dashboard is customized for this application, user input and output elements are listed below:     
 
