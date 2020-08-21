@@ -7,7 +7,7 @@
         "version": "1.0.0",
         "displayName": "Phase Sequence Detection of AC Supply using AVR128DA64(MPLAB X Project)",
         "projectName": "avr128da64-phase-sequence-detection-of-ac-supply-mplab",
-        "shortDescription": "This application note describes the implementation of a phase sequence and phase loss detection system for a three-phase AC supply and demonstrates the detection of phase sequence and phase loss faults on emulated three phase AC systems supply using the AVR128DA64 microcontroller",
+        "shortDescription": "This application note describes the implementation of a phase sequence and phase loss detection system for a three-phase AC supply and demonstrates the detection of phase sequence and phase loss faults on emulated three phase AC systems supply. The firmware is developed using AVR128DA64 microcontroller and STK600 development board",
         "ide": {
             "name": "MPLAB",
             "semverRange": ">=5.40"
