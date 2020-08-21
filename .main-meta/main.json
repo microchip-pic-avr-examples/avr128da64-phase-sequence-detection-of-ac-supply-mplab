@@ -56,7 +56,7 @@
             ],
             [
                "Peripherals", "VREF"
-            ]	           			
+            ]	
         ],
         "peripherals": [
             "TCA","SPI","USART","ZCD","ADC","VREF"
@@ -75,7 +75,7 @@
 			"RMS Voltage",
 			"Root mean square",
 			"Data Visualizer",
-			"Three-Phase Sequence Detection"		
+			"Three-Phase Sequence Detection"
         ],
 		"additionalData": {
 			"longDescription": {
