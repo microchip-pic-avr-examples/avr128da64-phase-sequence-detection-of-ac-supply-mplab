@@ -26,7 +26,7 @@ Following are the tools which are used for this demo application:
 * <a href="https://www.microchip.com/mplab/mplab-x-ide" rel="nofollow">MPLAB X (v5.40)</a>
 * <a href="https://www.microchip.com/mplab/compilers" rel="nofollow">XC8 compiler (v2.20)</a>
 * <a href="https://www.microchip.com/mplab/mplab-code-configurator" rel="nofollow">MPLAB® Code Configurator (v3.95.0)</a>
-* <a href="https://packs.download.microchip.com" rel="nofollow">DFP Pack (v1.4.75)</a>
+* <a href="https://packs.download.microchip.com" rel="nofollow">DFP Pack (v1.5.82)</a>
 * <a href="https://www.microchip.com/mplab/avr-support/data-visualizer" rel="nofollow">Standalone Data Visualizer (v2.20.674)</a>
 
 ## Hardware Used
