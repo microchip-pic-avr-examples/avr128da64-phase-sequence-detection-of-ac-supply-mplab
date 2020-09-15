@@ -36,7 +36,7 @@
 extern volatile uint8_t ZCDPhaseRvrslFlag[3];       //application variables 
 extern volatile uint8_t PhaseLossFlag[3];      //For 3 ZCD solution (64 pin controller)	
 extern volatile uint8_t ZCDPhaseLossFlag[3];
-extern volatile uint16_t timerCounterValue[3];   //we need uint16_t array for 64 pin controller timer calculation 
+extern volatile uint16_t timerCounterValue;   //we need uint16_t array for 64 pin controller timer calculation 
 
 int8_t ZCD1_Initialize()
 {   
@@ -59,7 +59,7 @@ ISR(ZCD1_ZCD_vect)
     if (ZCDPhaseRvrslFlag[0] == 1)
     {
 		ZCDPhaseRvrslFlag[0] = 0;
-		timerCounterValue[0] = TCA0_SINGLE_CNT;
+		timerCounterValue = TCA0_SINGLE_CNT;
     }
 	ZCDPhaseLossFlag[0] = 0;
 		
