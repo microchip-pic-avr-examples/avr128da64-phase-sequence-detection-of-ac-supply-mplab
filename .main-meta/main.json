@@ -37,7 +37,7 @@
             }
         },
         "author": "Microchip",
-        "subcategories": [
+        "subcategories":[
 		    "MCC",
             [
                "Peripherals", "TCA"
