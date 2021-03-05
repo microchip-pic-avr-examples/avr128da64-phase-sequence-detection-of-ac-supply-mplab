@@ -23,7 +23,7 @@ The demonstration is implemented with both AVR128DA64 and AVR128DA48 microcontro
 
 Microchip’s IDEs, compiler and graphical code generators are used throughout the application firmware development to provide an easy and hassle-free user experience. 
 Following are the tools which are used for this demo application:
-* <a href="https://www.microchip.com/mplab/mplab-x-ide" rel="nofollow">MPLAB X (v5.40)</a>
+* <a href="https://www.microchip.com/mplab/mplab-x-ide" rel="nofollow">MPLAB X (v5.45)</a>
 * <a href="https://www.microchip.com/mplab/compilers" rel="nofollow">XC8 compiler (v2.30)</a>
 * <a href="https://www.microchip.com/mplab/mplab-code-configurator" rel="nofollow">MPLAB® Code Configurator (v4.0.1)</a>
 * <a href="https://packs.download.microchip.com" rel="nofollow">DFP Pack (v1.5.82)</a>
@@ -65,8 +65,8 @@ Connects AVR device to the STK600 using an innovative routing (STK600-RC064AVR-1
 * Press SW0 button on STK600 board for selecting appropriate frequency (50Hz/60Hz) for the emulated three-phase AC signal.  
 
 <p align="center">
-  <img width=750 height=auto src="images/DemoSetup.png">
-  <br><strong>Figure 1: Demonstration Hardware Setup<br>
+  <img width=750 height=auto src="images/DemoSetup.png"></a>
+  <br>Figure 1: Demonstration Hardware Setup<br>
 </p>
 
 ## Data Visualizer Configuration
@@ -130,7 +130,7 @@ Figure 2 shows the Data Visualizer custom dashboard and input,output elements.
 Figure 2 shows the Data Visualizer Dashboard for Phase Sequence Detection of Three-phase AC Supply. 
 
 <p align="center">
-  <img width=750 height=auto src="images/DashBoard.png">
-  <br><strong>Figure 2: Data Visualizer Dashboard<br>
+  <img width=750 height=auto src="images/DashBoard.png"></a>
+  <br>Figure 2: Data Visualizer Dashboard<br>
 </p>
 
