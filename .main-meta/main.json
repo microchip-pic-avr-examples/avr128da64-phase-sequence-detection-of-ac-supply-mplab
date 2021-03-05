@@ -39,7 +39,6 @@
         "author": "Microchip",
         "subcategories": [
 		    "MCC",
-            "Functional Safety",
             [
                "Peripherals", "TCA"
             ],
