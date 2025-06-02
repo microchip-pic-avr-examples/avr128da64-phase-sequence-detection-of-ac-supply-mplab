@@ -8,7 +8,7 @@ The AVR® DA family of microcontrollers are peripheral rich, high performance an
 
 The application demonstrator showcases the phase sequence detection and phase loss detection on emulated three phase AC supply using AVR128DA64 microcontroller.
 
-## Relevant Application Note  
+## Application Note  
 Phase Sequence Detection of Three-Phase AC Supply demonstration and implementation is discussed in the <a href="https://microchip.com/DS00003607" rel="nofollow">Phase Sequence Detection of Three-Phase AC Supply Application Note.</a>
 
 ## Application Firmware
@@ -21,27 +21,31 @@ The demonstration is implemented with both AVR128DA64 and AVR128DA48 microcontro
 
 ## Software Tools Used 
 
-Microchip’s IDEs, compiler and graphical code generators are used throughout the application firmware development to provide an easy and hassle-free user experience. 
+This application uses MPLAB® X IDE compiler and graphical code generator to provide an easy and hassle-free user experience.
+
+The following tools are used for this demo application:
 Following are the tools which are used for this demo application:
-* <a href="https://www.microchip.com/mplab/mplab-x-ide" rel="nofollow">MPLAB X (v5.45)</a>
-* <a href="https://www.microchip.com/mplab/compilers" rel="nofollow">XC8 compiler (v2.30)</a>
-* <a href="https://www.microchip.com/mplab/mplab-code-configurator" rel="nofollow">MPLAB® Code Configurator (v4.0.1)</a>
-* <a href="https://packs.download.microchip.com" rel="nofollow">DFP Pack (v1.5.82)</a>
-* <a href="https://www.microchip.com/mplab/avr-support/data-visualizer" rel="nofollow">Standalone Data Visualizer (v2.20.674)</a>
+* <a href="https://www.microchip.com/mplab/mplab-x-ide" rel="nofollow">MPLAB® X IDE</a> v6.25 or newer
+* <a href="https://www.microchip.com/mplab/compilers" rel="nofollow">XC8 compiler</a> v3.00 or newer
+* <a href="https://www.microchip.com/mplab/mplab-code-configurator" rel="nofollow">MPLAB® Code Configurator</a> v5.5.3 or newer
+* <a href="https://packs.download.microchip.com" rel="nofollow">Microchip AVR-Dx Series Device Support</a> v2.7.321 or newer
+* <a href="https://www.microchip.com/mplab/avr-support/data-visualizer" rel="nofollow">MPLAB® Data Visualizer</a> v1.4.1926 or newer
+* ADC MCC Melody Driver 5.0.0
+* SPI MCC Melody Driver 5.1.0
+* TCA MCC Melody Driver 7.1.0
+* USART MCC Melody Driver 10.2.1
+* VREF MCC Melody Driver 4.1.0
+* ZCD MCC Melody Driver 4.0.4
 
 ## Hardware Used
 
-* <a href="https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/DM164151" rel="nofollow">AVR128DA48 Curiosity Nano board</a>
+* <a href="https://www.microchip.com/en-us/product/avr128da64" rel="nofollow">AVR128DA64</a>
 * <a href="https://www.microchip.com/developmenttools/ProductDetails/AC164162" rel="nofollow">Curiosity Nano base for click boards</a>
-* <a href="https://www.mikroe.com/waveform-click" rel="nofollow">Three waveform clicks</a>
+* <a href="https://www.mikroe.com/waveform-click" rel="nofollow">Waveform Clicks</a>
 * SMA male cable
-* Berg connectors 
-* <a href="http://ww1.microchip.com/downloads/en/DeviceDoc/STK600-AVR-Flash-MCU-Starter-Kit-Users-Guide-DS40001904D.pdf" rel="nofollow">STK600</a>
-* Socket card <a href="https://www.microchip.com/Developmenttools/ProductDetails/ATSTK600-SC14" rel="nofollow">(STK600 TQFP64-2)</a>
-* Routing card (STK600-RC064AVR-108)</a>
-* USB cables 
-  - Micro B USB cables
-  - Type B USB connector
+* <a href="http://ww1.microchip.com/downloads/en/DeviceDoc/STK600-AVR-Flash-MCU-Starter-Kit-Users-Guide-DS40001904D.pdf" rel="nofollow">STK600 Board</a>
+* <a href="https://www.microchip.com/Developmenttools/ProductDetails/ATSTK600-SC14" rel="nofollow">Socket card</a> (STK600 TQFP64-2)
+* Routing card (STK600-RC064AVR-108)
   
 ## Demonstration Setup
 
@@ -82,7 +86,7 @@ Here is the list of Data Visualizer modules used for Demonstration –
   * Radio Group
 * Data Streamer (Data Streamer file is given for the demonstration)  
 
-Refer Data Visualizer User Guide for more information about <a href="http://ww1.microchip.com/downloads/Secure/en/DeviceDoc/40001903B.pdf" rel="nofollow">Data Visualizer.</a> 
+Refer Data Visualizer User Guide for more information about <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/DEV/ProductDocuments/UserGuides/MPLAB_DATA_VISUALIZER_1_4_1926.pdf" rel="nofollow"> Data Visualizer.</a> 
 
 The demo uses an emulated three-phase AC supply to showcase the essential features of the application. To emulate the AC power supply three waveform clicks are used in the application.
 
@@ -101,36 +105,39 @@ The Data Visualizer custom dashboard is customized for this application, user in
 
 ### Application Output Indicators
 
--	Phase reversal status indicator
--	Phase loss status indicator
--	L1 Vrms, L2 Vrms, and L3 Vrms values
--	Operating Freq (Hz)
+-	Three phase Waveforms (using Graphs)
+-	Phase reversal (using status indicator)
+-	Phase loss status (using status indicator)
+-	Operating Freq (using sequence output)
+The figure below shows the Data Visualizer custom dashboard and input, output elements.
 
-Figure 2 shows the Data Visualizer custom dashboard and input,output elements.
+<p align="center">
+  <img width=auto height=auto src="images/inputOutput.png">
+  <br>Figure 2: User Inputs & Output Status <br>
+</p>
 
 
 ## Demo Operation
 
-1.	Configure serial port for communication with the Curiosity nano board. 
-2.	Configure data streamer for interfacing Graph window and Dashboard window with the serial port control panel. Data streamer configuration **(data-streamer-config.txt)** file is available in example firmware folder.
-3.	Configure Graph window for displaying the emulated three phase supply AC waveforms, generated by the waveform clicks.
-4.	Configure custom dashboard window to display the output and to receive user inputs. Custom dashboard **(custom-dashboard-config)** design file is available in example firmware folder. 
-5.	The Blue labeled elements on custom dashboard are Inputs and Red labeled elements are Outputs.
-6.	Connect the hardware and prepare demonstrator setup as per the instructions provided in Demonstration setup section.
-7.	Click Serial Port Control Panel Connect button.
-8.	Using push button (SW0) on the STK600 board select appropriate frequency for the three-phase signal. The selected frequency is displayed on the custom dashboard window.
-9.	Zoom in or Zoom out the graph on Graph window by clicking the +/- magnifier symbol below the Graph window.
-10.	Insert phase loss fault by clicking the L1 radio button on dashboard, which disables the L1 signal out of three-phase signal to emulate phase loss input. 
-11.	Insert phase loss fault by clicking the L2 radio button on dashboard, which disables the L2 signal out of three-phase signal to emulate phase loss input.
-12.	Insert phase loss fault by clicking the L3 radio button on dashboard, which disables the L3 signal out of three-phase signal to emulate phase loss input.
-13.	Insert phase reversal by clicking the PR radio button on dashboard, which changes the sequence of the three-phase signal to L1-L3-L2.
-
- **NOTE:** For more details on application demonstration setup refer Phase Sequence Detection of Three-Phase AC Supply <a href="https://microchip.com/DS00003607" rel="nofollow">Application Note section 7.</a> 
+1. Configure the serial port for communication with the Curiosity Nano board.
+2. Configure the data streamer for interfacing dashboard window with the serial port by clicking on IMPORT tab. The data streamer configuration (data-streamer-config.txt) file is available in the example firmware folder.
+3. Configure the graph window for displaying the emulated three phase supply AC waveforms, generated by the Waveform Clicks.
+4. Configure the custom dashboard window to display the output and to receive user inputs by clicking on load option on dashboard window. The custom dashboard (custom-dashboard-config) design file is available in the example firmware folder.
+5. There are elements on the custom dashboard as inputs and status showing the phase states as outputs.
+6. Connect the hardware and prepare the demo setup as per the instructions provided in the Demonstration setup section. 
+7. Click Serial Port Connect button.
+8. Using push button (SW0) on the Curiosity Nano board, select the appropriate frequency for the three-phase signal. The selected frequency is displayed on the custom dashboard window.
+9. Zoom in or zoom out the graph on custom dashboard by clicking the +/- magnifier symbol on the left side of the graph window.
+10. Insert phase loss fault by clicking the L1 radio button on dashboard, which disables the L1 signal out of three-phase signal to emulate phase loss input.
+11. Insert phase loss fault by clicking the L2 radio button on dashboard, which disables the L2 signal out of three-phase signal to emulate phase loss input.
+12. Insert phase loss fault by clicking the L3 radio button on dashboard, which disables the L3 signal out of three-phase signal to emulate phase loss input.
+13. Insert phase reversal by clicking the PR radio button on dashboard, which changes the sequence of the three-phase signal.
+14. The status indicators have two states: Red - phase reversal, phase loss Green - No phase reversal, No phase loss.
 
 Figure 2 shows the Data Visualizer Dashboard for Phase Sequence Detection of Three-phase AC Supply. 
 
 <p align="center">
-  <img width=750 height=auto src="images/DashBoard.png"></a>
-  <br>Figure 2: Data Visualizer Dashboard<br>
+  <img width=750 height=auto src="images/customDashboard.png">
+  <br>Figure 3: Data Visualizer Custom Dashboard<br>
 </p>
 

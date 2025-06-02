@@ -1,77 +1,249 @@
-/*
- * application.h
- *
- * Created: 12/19/2019 9:11:59 AM
- *  Author: I20946
- */ 
+#ifndef XC_APPLICATION_H
+#define	XC_APPLICATION_H
 
-#include "mcc_generated_files/include/adc0.h"
+/******************************************************************************/
+/*                                                                            */
+/*                               HEADER FILES                                 */
+/*                                                                            */
+/******************************************************************************/
+#include <xc.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include "mcc_generated_files/system/system.h"
+#include "application_AD5227.h"
+#include "application_AD9833.h"
+#include "datastreamer.h"
+#include "phaseFeatures.h"
+#include <util/delay.h>
 
-#ifndef APPLICATION_H_
-#define APPLICATION_H_
+/******************************************************************************/
+/*                                                                            */
+/*                            USER DEFINED MACROS                             */
+/*                                                                            */
+/******************************************************************************/
 
-///application Configuration///////////
-#define ADC_MODE 0       //0 - single ended ADC 1- Differential ADC
-///////////////////////////////////////
+/* ADC FACTORS */
+#define ADC_STEPS_PER_VOLTAGE   (0.00322f)          // 10-bit ADC Step value = (3.3V/1024)
+#define ADC_OFFSET_VALUE        (550)               // Practically generated signal offset
 
-#define ZERO_FREQ 0
-#define DEFAULT_FREQ1 50
-#define DEFAULT_FREQ2 60
-#define PHASE_SHIFT1 0
-#define PHASE_SHIFT2 120
-#define PHASE_SHIFT3 240
+/* DATA STREAMER PARAMETERS */
+#define START_OF_FRAME          (0x03)              // Data Streamer Start Of Frame (SOF)
+#define END_OF_FRAME            (0xFC)              // Data Streamer End Of Frame (EOF)
 
-#define TIMER_TIME_PER_CLOCK 0.00000033f
-#define REFRESH_COUNT 120000               //1 min 
-#define SWITCH_TIME_COUNT 20000            //(20000 == 10sec)   
-#define MIN_RMS_VOLTAGE 0.3                //minimum voltage near to zero  
-#define BITS_PER_DEG 11.3777777777778f	   // 4096 / 360
-#define NUMBER_OF_SAMPLES_50Hz 80
-#define NUMBER_OF_SAMPLES_60Hz 64
-#define WAVEFORM_OSC_FREQ  25000000.0f     //Waveform click oscillator frequency 
-#define WVVEFORM_CONSTANT  268435456.0f    //equation constant 
+/* APPLICATION BASED MACROS */
+#define EMPTY_BUFFER            (0)
 
-#if(!ADC_MODE)
-    #define ADC_STEPS_PER_VOLTAGE 0.000805f
-    #define ADC_OFFSET_VALUE 2100              //Practically generated singal is not exactly 3.3V its considered as below 3.3 so (4000 - 2000 = 2000)
-#else
-    #define ADC_STEPS_PER_VOLTAGE 0.0016113f
-    #define ADC_OFFSET_VALUE 1050              //Practically generated singal is not exactly 3.3V its considered as below 3.3 so (4000 - 2000 = 2000)
-#endif
+#define REGISTER_SIZE           (2)
 
-enum SCH_STAES { RECOVER_S = 0,           
+#define FLAG_SET                (1)
+#define FLAG_RESET              (0)
+
+#define COUNTER_SET             (1)
+#define COUNTER_RESET           (0)
+
+#define CHANNEL_B               (0)
+#define CHANNEL_G               (1)
+#define CHANNEL_R               (2)
+#define CHANNEL_COUNT           (3)
+
+#define AMPL_DEC_LIMIT          (9)
+#define AMPL_INC_LIMIT          (20)
+
+#define PHASE_LOSS              (0)
+#define NO_PHASE_LOSS           (1)
+
+#define PHASE_R                 (1)
+#define PHASE_B                 (0)
+
+#define DS_BUFFER_SIZE          (12)
+
+#define CYCLE_COUNT             (30)
+#define PH_DETECT_CYCLE_COUNT   (31)
+
+#define CALC_Vrms_CYCLE         (38)
+
+#define NO_PHASE_REV            (0x00)
+#define PHASE_REV               (0x01)
+
+#define PHASE_SHIFT_MIN_TIME    (0.003)
+#define PHASE_SHIFT_MAX_TIME    (0.008)
+
+#define SWITCH_PRESSED          (SW_GetValue() == false)
+
+/******************************************************************************/
+/*                                                                            */
+/*                          USER DEFINED STRUCTURES                           */
+/*                                                                            */
+/******************************************************************************/
+
+/* DATA STREAMER FIELDS */
+typedef struct{
+	uint8_t start_of_frame;                // 1B
+	uint16_t RsignalData;                  // 2B
+	uint16_t YsignalData;                  // 2B
+	uint16_t BsignalData;                  // 2B
+	uint8_t phaseReversalFlag;             // 1B
+	uint8_t phaseLossFlag[CHANNEL_COUNT];  // 3B
+	uint8_t Opfreq;                        // 1B
+	uint8_t end_of_frame;                  // 1B
+}DataStreamer_st;
+
+/* DATA STREAMER FRAME CREATION */
+typedef union {
+	uint8_t  DataStreamer_buffer[12]; 
+    DataStreamer_st dataStreamer_st;	
+}DataStreamerFrame_u;
+
+/* SIGNAL STATES */
+enum SIGNAL_STAGES { 
+    RECOVER_S = 0,           
 	RMV_R_S = 1,
 	RMV_Y_S = 2,
     RMV_B_S,
 	PHASE_RVRSL_S
 };
 
-enum WfClickSG_e { WfClickSG_1 = 1,
-	WfClickSG_2,
-	WfClickSG_3
-};
+/******************************************************************************/
+/*                                                                            */
+/*                          USER DEFINED VARIABLES                            */
+/*                                                                            */
+/******************************************************************************/
+extern uint8_t freqSelection;
+extern uint8_t RxData[2];
+extern uint16_t numberofSamples;
+extern uint16_t targetedSamples;
+extern uint16_t ADC_Results_L[4];
+extern float Vrms[3];
+extern float frequencyValue;
+extern float line_voltage[3];
+extern volatile uint8_t phaseRSignalCounter;
+extern volatile uint8_t phaseBSignalCounter;
+extern volatile uint8_t timer2CounterValue;
+extern volatile uint8_t  timer4OverflowFlag;
+extern volatile uint32_t refreshCount;
+extern volatile uint16_t timer4OvfCnt;
+extern volatile uint8_t ZCD_Int_flag[3];
+extern volatile uint8_t PhaseLossFlag[CHANNEL_COUNT];
+extern DataStreamerFrame_u dataStreamerFrame_u;
+extern WfclkSel_st wfclkSel_st;
 
-enum WfClickDP_e { WfClickDP_1 = 1,
-	WfClickDP_2,
-	WfClickDP_3
-};
+/******************************************************************************/
+/*                                                                            */
+/*                    USER DEFINED FUNCTION DECLARATION                       */
+/*                                                                            */
+/******************************************************************************/
 
-enum FREQ_sel { DeFHz = 1,
-	F50Hz = 1,
-	F60Hz =2
-};
-
-typedef struct waveformClickSelector {
-	uint8_t AD9833_sel;            //for signal generation 
-	uint8_t AD5227_sel;            //for digital pot 
-}WfclkSel_st;
-
-void AD9833Select(uint8_t selAD9833);
-void AD5227Select(uint8_t selAD5227);
-void threePhaseAmplitudeMax();
-void threePhaseAmplitudeMin();
+/**
+ * void application(void)
+ * 
+ * @brief API to run the application. It is scheduled to reproduce the simulated 3 phase signal,
+ *        phase loss logic, phase reversal logic, refresh the emulator signal, and receive user
+ *        command and execute the commands.
+ * 
+ * @param None.
+ * @return None.
+ */
 void application(void);
-void defaultSignalGeneration();
-void FrequencySelectionCallBack(uint8_t sel);
-void readSwToSelectFrequency();
-#endif /* APPLICATION_H_ */
+
+/**
+ * void threePhaseAmplitudeMax(void)
+ * 
+ * @brief API to increase the amplitude of the 3 phase signals (R G B).
+ * 
+ * @param None.
+ * @return None.
+ */
+void threePhaseAmplitudeMax(void);
+
+/**
+ * void threePhaseAmplitudeMin(void)
+ * 
+ * @brief API to decrease the amplitude of the 3 phase signals (R G B).
+ * 
+ * @param None.
+ * @return None.
+ */
+void threePhaseAmplitudeMin(void);
+
+/**
+ * void defaultSignalGeneration(void)
+ * 
+ * @brief API to generate default signals for 3 Phase Sequence Detection (PSD) input.
+ * 
+ * @param None.
+ * @return None.
+ */
+void defaultSignalGeneration(void);
+
+/**
+ * void readSwToSelectFrequency(void)
+ * 
+ * @brief API to read switch press event to accept user input for selecting signal frequency (50/60 Hz).
+ * 
+ * @param None.
+ * @return None.
+ */
+void readSwToSelectFrequency(void);
+
+/**
+ * void frequencySelectionCallBack(void)
+ * 
+ * @brief API to select the frequency of input signal for the PSD application.
+ * 
+ * @param userFreqSelection - user input for selecting the frequency
+ * @return None.
+ */
+void frequencySelectionCallBack(uint8_t userFreqSelection);
+
+/**
+ * uint16_t waveformAproxPhasecalculation(float phase)
+ * 
+ * @brief API to calculate the phase value to be set in phase bit field of the AD9833 register.
+ * 
+ * @param phase - phase to be shifted.
+ * @return phase value to be set in the control register.
+ */
+uint16_t waveformAproxPhasecalculation(float phase);
+
+/**
+ * uint32_t waveformAproxFreqcalculation(float frequency)
+ * 
+ * @brief API to calculate the frequency value to be set in frequency bit field of the AD9833 register.
+ * 
+ * @param frequency - frequency to be set.
+ * @return frequency value to be set in the control register.
+ */
+uint32_t waveformAproxFreqcalculation(float frequency);
+
+/**
+ * void TMR4_UserInterruptHandler(void)
+ * 
+ * @brief User defined TMR4 interrupt handler.
+ * 
+ * @param None.
+ * @return None.
+ */
+void TCA1_UserInterruptHandler(void);
+
+/**
+ * void ZCD1_UserInterruptHandler(void)
+ * 
+ * @brief User defined ZCD1 interrupt handler.
+ * 
+ * @param None.
+ * @return None.
+ */
+void ZCD0_UserInterruptHandler(void);
+
+/**
+ * void ZCD2_UserInterruptHandler(void)
+ * 
+ * @brief User defined ZCD2 interrupt handler.
+ * 
+ * @param None.
+ * @return None.
+ */
+void ZCD1_UserInterruptHandler(void);
+
+#endif	/* XC_APPLICATION_H */

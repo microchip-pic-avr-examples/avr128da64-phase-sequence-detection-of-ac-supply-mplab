@@ -1,92 +1,103 @@
-/*
- * CFile1.c
- *
- * Created: 1/29/2020 10:54:55 AM
- *  Author: I20946
- */ 
+/******************************************************************************/
+/*                                                                            */
+/*                               HEADER FILES                                 */
+/*                                                                            */
+/******************************************************************************/
+#include "application_AD5227.h"
+#include "mcc_generated_files/system/system.h"
+#include "application_AD9833.h"
 
-#include "AD5227.h"
-#include "mcc_generated_files/config/clock_config.h"
-#include <util/delay.h>
-#include "Communication.h"
+/******************************************************************************/
+/*                                                                            */
+/*                USER DEFINED LOCAL FUNCTION DECLARATION                     */
+/*                                                                            */
+/******************************************************************************/
+static void AD5227_CS1_set_level(uint8_t level);
+static void AD5227_CS2_set_level(uint8_t level);
+static void AD5227_CS3_set_level(uint8_t level);
 
-/*******************************************************************************
- * void AD5227DigipotInc()
- *
- * API to increase the pk-pk voltage of the signal (AD5227 digital pot)   
- *
- * @param void
- * @return void 
- ******************************************************************************/
-void AD5227DigipotInc()
+/******************************************************************************/
+/*                                                                            */
+/*                    USER DEFINED FUNCTION DEFINITIONS                       */
+/*                                                                            */
+/******************************************************************************/
+void AD5227Select(uint8_t selAD5227)
+{
+	wfclkSel_st.AD5227_sel = selAD5227;
+}
+
+void AD5227DigipotInc(void)
 {
 	uint8_t transferBuff[2];
 	
 	transferBuff[0] = 0x1F;
 	AD5227_CS_LOW;
 	
-	SPI_Write(transferBuff,1);
-
+	SPI0_BufferWrite(transferBuff,1);
 	
 	AD5227_CS_HIGH;
 }
 
-/*******************************************************************************
- * void AD5227DigipotDec()
- *
- * API to decrease the pk-pk voltage of the signal (AD5227 digital pot)   
- *
- * @param void
- * @return void 
- ******************************************************************************/
-void AD5227DigipotDec()
+void AD5227DigipotDec(void)
 {
 	uint8_t transferBuff[2];
 	
 	transferBuff[0] = 0x07;
     AD5227_CS_LOW;
 
-	SPI_Write(transferBuff,1);
+	SPI0_BufferWrite(transferBuff,1);
 
 	AD5227_CS_HIGH;
-
 }
 
-/*******************************************************************************
- * void AD5227DigipotMax(uint8_t click)
- *
- * API to increase the voltage of selected click to maximum 
- *
- * @param slave address  (SPI slave AD5227)
- * @return void 
- ******************************************************************************/
-void AD5227DigipotMax(uint8_t click)
+void AD5227_chipSelect(uint8_t selAD5227, uint8_t level)
 {
-uint16_t index = 0;
-
- AD5227Select(click);
- for(index=0;index<=12;index++)  //63
- {
-	AD5227DigipotInc();
-
- }
-
-}
-
-/*******************************************************************************
- * void AD5227DigipotMin(uint8_t click)
- *
- * API to decrease the voltage of selected click to minimum  
- *
- * @param slave address  (SPI slave AD5227)
- * @return void 
- ******************************************************************************/
-void AD5227DigipotMin(uint8_t click)
-{
-	uint16_t index = 0;
-    AD5227Select(click);
-	for(index=0;index<=16;index++)
+	switch(selAD5227)
 	{
-		AD5227DigipotDec();
+		case 1:
+		AD5227_CS1_set_level(level);
+		break;
+		case 2:
+		AD5227_CS2_set_level(level);
+		break;
+		case 3:
+		AD5227_CS3_set_level(level);
+		break;
 	}
+}
+
+static void AD5227_CS1_set_level(uint8_t level)
+{
+    if(level)
+    {
+        AD5227_CS1_SetHigh();
+    }
+    else
+    {
+        AD5227_CS1_SetLow();
+    }
+}
+
+static void AD5227_CS2_set_level(uint8_t level)
+{
+    if(level)
+    {
+        AD5227_CS2_SetHigh();
+    }
+    else
+    {
+        AD5227_CS2_SetLow();
+    }
+}
+
+static void AD5227_CS3_set_level(uint8_t level)
+{
+    if(level)
+    {
+        AD5227_CS3_SetHigh();
+    }
+    else
+    {
+        AD5227_CS3_SetLow();
+    }
 }

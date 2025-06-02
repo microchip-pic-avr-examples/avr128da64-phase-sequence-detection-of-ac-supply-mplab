@@ -4,24 +4,14 @@
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
             <name>avr128da64-phase-sequence-detection-of-ac-supply-mplab</name>
-            <creation-uuid>02b1699e-be7b-4887-a85d-162173f94b43</creation-uuid>
+            <creation-uuid>93d7eab2-dc71-4fad-946d-7c5b2484b5f4</creation-uuid>
             <make-project-type>0</make-project-type>
-            <c-extensions>c</c-extensions>
-            <cpp-extensions/>
-            <header-extensions>h</header-extensions>
-            <asminc-extensions/>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList>
-                <sourceRootElem>.</sourceRootElem>
-            </sourceRootList>
+            <sourceRootList/>
             <confList>
                 <confElem>
                     <name>free</name>
-                    <type>2</type>
-                </confElem>
-                <confElem>
-                    <name>default</name>
                     <type>2</type>
                 </confElem>
                 <confElem>

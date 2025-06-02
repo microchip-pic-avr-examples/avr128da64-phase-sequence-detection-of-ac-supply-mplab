@@ -5,7 +5,4 @@ B,2,1,PhaseRvrsl
 B,2,2,PL-L1
 B,2,3,PL-L2
 B,2,4,PL-L3
-F,3,1,VrmsL1
-F,3,2,VrmsL2
-F,3,3,VrmsL3
 B,4,1,Freq
