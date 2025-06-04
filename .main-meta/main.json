@@ -2,7 +2,7 @@
     "metaDataVersion": "1.0.0",
     "category": "com.microchip.ide.project",
     "content": {
-        "metaDataVersion": "1.1.0",
+        "metaDataVersion": "1.3.0",
         "name": "com.microchip.mcu8.mplabx.project.avr128da64-phase-sequence-detection-of-ac-supply-mplab",
         "version": "2.0.0",
         "displayName": "Phase Sequence Detection of AC Supply using AVR128DA64 Microcontroller(MPLAB X Project)",
@@ -63,13 +63,12 @@
         ],
         "keywords": [
             "Curiosity Nano",
-			"Phase Sequence Detection",
-			"Three-Phase AC Supply",
-			"Phase Loss",
-			"Phase Reversal",
-			"Phase Detection",
-			"Zero Phase",
-			"Rms Voltage",
+			"Three-Phase",
+			"AC Voltage",
+			"RMS Voltage",
+			"RMS",
+			"Zero-Crossing Detect",
+			"MPLAB Data Visualizer",
 			"Data Visualizer"
         ],
 		"additionalData": {
