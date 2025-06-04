@@ -36,28 +36,7 @@
                 "versionRange": "*"
             }
         },
-        "author": "Microchip",
-        "subcategories":[
-		    "MCC",
-            [
-               "Peripherals", "TCA"
-            ],
-            [
-               "Peripherals", "SPI"
-            ],
-            [
-               "Peripherals", "USART"
-            ],
-            [
-               "Peripherals", "ZCD"
-            ],
-            [
-               "Peripherals", "ADC"
-            ],
-            [
-               "Peripherals", "VREF"
-            ]	
-        ],
+        "author": "Microchip",        
         "peripherals": [
             "TCA","SPI","USART","ZCD","ADC","VREF"
         ],
