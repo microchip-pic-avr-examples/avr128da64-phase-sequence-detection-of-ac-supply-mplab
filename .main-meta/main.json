@@ -43,10 +43,9 @@
         "keywords": [
             "Curiosity Nano",
 			"Three-Phase",
-			"AC Voltage",
-			"RMS Voltage",
+			"AC",
 			"RMS",
-			"Zero-Crossing Detect",
+			"ZCD",
 			"MPLAB Data Visualizer",
 			"Data Visualizer"
         ],
